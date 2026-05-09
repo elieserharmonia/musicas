@@ -125,30 +125,7 @@
   .btn-wpp:hover { opacity: 0.93; }
   .btn-wpp:active { transform: scale(0.98); }
 
-  .result-box {
-    background: #fff; border: 2px solid #25D366; border-radius: var(--radius);
-    padding: 22px; margin-top: 24px; display: none;
-  }
-  .result-box h3 { font-family: 'Playfair Display', serif; color: #128C7E; margin-bottom: 14px; font-size: 1.1rem; }
-  .result-content {
-    background: #f0fff4; border-radius: 10px; padding: 16px;
-    font-size: 0.87rem; line-height: 1.9; white-space: pre-wrap;
-    color: #222; border: 1px solid #b2dfdb; font-family: 'Courier New', monospace;
-  }
-  .result-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-  .copy-btn {
-    background: #e0f2f1; color: #128C7E; border: none; border-radius: 8px;
-    padding: 9px 20px; font-weight: 700; cursor: pointer;
-    font-family: 'Nunito', sans-serif; font-size: 0.88rem; transition: all .18s;
-  }
-  .copy-btn:hover { background: #128C7E; color: #fff; }
-  .send-wpp-btn {
-    background: #25D366; color: #fff; border: none; border-radius: 8px;
-    padding: 9px 20px; font-weight: 700; cursor: pointer;
-    font-family: 'Nunito', sans-serif; font-size: 0.88rem; transition: all .18s;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  }
-  .send-wpp-btn:hover { background: #128C7E; }
+
 
   .footer { text-align: center; padding: 28px 16px; color: #bbb; font-size: 0.82rem; }
   .heart { color: var(--rose); }
@@ -266,18 +243,7 @@
     <span style="font-size:1.4rem">📲</span>
     Enviar pedido pelo WhatsApp
   </button>
-  <p style="text-align:center;font-size:0.78rem;color:#bbb;margin-top:8px">Você será redirecionado ao WhatsApp com o resumo pronto</p>
-
-  <div class="result-box" id="resultado">
-    <h3>✅ Resumo gerado com sucesso!</h3>
-    <div class="result-content" id="resultado-texto"></div>
-    <div class="result-actions">
-      <button class="copy-btn" id="copy-btn" onclick="copiarResumo()">📋 Copiar resumo</button>
-      <a class="send-wpp-btn" id="wpp-link" href="#" target="_blank">
-        <span>📲</span> Abrir no WhatsApp
-      </a>
-    </div>
-  </div>
+  <p style="text-align:center;font-size:0.78rem;color:#bbb;margin-top:8px">Você será redirecionado ao WhatsApp com o pedido pronto</p>
 
 </div>
 
@@ -362,30 +328,11 @@
       '✅ Aguardando confirmação de pagamento\n' +
       '🎵 Entrega após confirmação do PIX';
 
-    document.getElementById('resultado-texto').textContent = resumo;
-    var box = document.getElementById('resultado');
-    box.style.display = 'block';
-
     var link = 'https://wa.me/5514996074964?text=' + encodeURIComponent(resumo);
-    document.getElementById('wpp-link').href = link;
     window.open(link, '_blank');
-    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function copiarResumo() {
-    var texto = document.getElementById('resultado-texto').textContent;
-    var btn = document.getElementById('copy-btn');
-    navigator.clipboard.writeText(texto).then(function() {
-      btn.textContent = '✅ Copiado!';
-      setTimeout(function() { btn.textContent = '📋 Copiar resumo'; }, 2500);
-    }).catch(function() {
-      var ta = document.createElement('textarea');
-      ta.value = texto; document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); document.body.removeChild(ta);
-      btn.textContent = '✅ Copiado!';
-      setTimeout(function() { btn.textContent = '📋 Copiar resumo'; }, 2500);
-    });
-  }
+
 </script>
 </body>
 </html>
