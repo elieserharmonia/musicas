@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Música Personalizada — Por menos de R$ 5,00</title>
+<meta name="description" content="Crie sua música personalizada em poucos minutos por menos de R$ 5,00. Sertanejo, pagode, funk, gospel e muito mais!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #c2185b;
+    --rose-light: #f8bbd0;
+    --rose-dark: #880e4f;
+    --gold: #e8a045;
+    --cream: #fff8f0;
+    --text: #2d1b2e;
+    --green: #4caf50;
+    --pix: #00b894;
+    --radius: 14px;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #880e4f 0%, #c2185b 50%, #e91e8c 100%);
+    overflow: hidden;
+    text-align: center;
+    padding: 50px 20px 70px;
+  }
+
+  .petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .petal {
+    position: absolute;
+    animation: fall linear infinite;
+    opacity: 0.65;
+    user-select: none;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-50px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(500px) rotate(400deg); opacity: 0; }
+  }
+
+  .badge {
+    background: var(--gold);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+
+  .hero p { color: #f8bbd0; font-size: 1rem; margin-bottom: 20px; }
+
+  .price-tag {
+    background: #fff;
+    color: var(--rose-dark);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 32px;
+    border-radius: 30px;
+    display: inline-block;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+  .price-tag span { color: var(--gold); font-size: 1.5rem; }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 50px;
+  }
+
+  .section {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-top: 24px;
+    border: 1px solid #f3e0ea;
+    box-shadow: 0 2px 12px rgba(194,24,91,0.06);
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--rose-dark);
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+  }
+
+  /* ── TAGS (assuntos) ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 8px 15px;
+    border-radius: 22px;
+    border: 2px solid var(--rose-light);
+    background: #fff;
+    color: var(--rose-dark);
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all .18s;
+    user-select: none;
+  }
+  .tag:hover { background: #fff0f6; border-color: var(--rose); }
+  .tag.active { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+  /* ── ESTILOS ── */
+  .styles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  .style-card {
+    border: 2px solid #f3e0ea;
+    border-radius: 12px;
+    padding: 14px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .18s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+    user-select: none;
+  }
+  .style-card:hover { background: #fff0f6; border-color: var(--rose); }
+  .style-card.active { border-color: var(--rose); background: #fff0f6; box-shadow: inset 0 0 0 1px var(--rose); }
+  .style-icon { font-size: 1.6rem; margin-bottom: 5px; }
+
+  /* ── VOZ ── */
+  .voice-row { display: flex; gap: 14px; }
+  .voice-btn {
+    flex: 1;
+    border: 2px solid #f3e0ea;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .18s;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--rose-dark);
+    user-select: none;
+  }
+  .voice-btn:hover { background: #fff0f6; border-color: var(--rose); }
+  .voice-btn.active { border-color: var(--rose); background: #fff0f6; box-shadow: inset 0 0 0 1px var(--rose); }
+  .v-icon { font-size: 2.2rem; display: block; margin-bottom: 5px; }
+
+  /* ── EXEMPLOS ── */
+  .examples { display: flex; flex-direction: column; gap: 10px; }
+  .example-item {
+    background: #fff8ff;
+    border: 1px solid var(--rose-light);
+    border-radius: 10px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .play-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: background .18s;
+  }
+  .play-btn:hover { background: var(--rose-dark); }
+  .ex-info { flex: 1; }
+  .ex-title { font-weight: 700; font-size: 0.9rem; color: var(--rose-dark); }
+  .ex-desc { font-size: 0.78rem; color: #aaa; margin-top: 2px; }
+  .ex-link { font-size: 0.78rem; color: var(--rose); font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .ex-link:hover { text-decoration: underline; }
+
+  .add-example-btn {
+    width: 100%;
+    border: 2px dashed var(--rose-light);
+    border-radius: 10px;
+    padding: 13px;
+    text-align: center;
+    color: var(--rose);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: transparent;
+    font-family: 'Nunito', sans-serif;
+    transition: all .18s;
+    margin-top: 10px;
+  }
+  .add-example-btn:hover { background: #fff0f6; border-color: var(--rose); }
+
+  .add-form { display: none; margin-top: 12px; }
+  .add-form input {
+    width: 100%;
+    border: 1.5px solid #f3e0ea;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border .18s;
+    margin-bottom: 8px;
+  }
+  .add-form input:focus { border-color: var(--rose); }
+  .save-ex-btn {
+    background: var(--rose);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 22px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    transition: background .18s;
+  }
+  .save-ex-btn:hover { background: var(--rose-dark); }
+
+  /* ── FORMULÁRIO ── */
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--rose-dark);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    border: 1.5px solid #f3e0ea;
+    border-radius: 10px;
+    padding: 11px 15px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border .18s;
+    color: var(--text);
+    background: #fff;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--rose); }
+  .form-group textarea { min-height: 90px; resize: vertical; }
+
+  /* ── PAGAMENTO ── */
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .pay-card {
+    border: 2px solid #f3e0ea;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .18s;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #555;
+    user-select: none;
+  }
+  .pay-card:hover { background: #fff0f6; border-color: var(--rose); }
+  .pay-card.active { border-color: var(--rose); background: #fff0f6; box-shadow: inset 0 0 0 1px var(--rose); color: var(--rose-dark); }
+  .pay-icon { font-size: 1.6rem; margin-bottom: 5px; }
+
+  .secure-note {
+    font-size: 0.78rem;
+    color: #bbb;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* ── BOTÃO GERAR ── */
+  .btn-gerar {
+    width: 100%;
+    background: linear-gradient(90deg, var(--rose-dark), var(--rose));
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    font-family: 'Nunito', sans-serif;
+    transition: opacity .2s, transform .1s;
+    letter-spacing: 0.3px;
+  }
+  .btn-gerar:hover { opacity: 0.93; }
+  .btn-gerar:active { transform: scale(0.98); }
+
+  /* ── RESULTADO ── */
+  .result-box {
+    background: #fff;
+    border: 2px solid var(--rose);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-top: 24px;
+    display: none;
+  }
+  .result-box h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--rose-dark);
+    margin-bottom: 14px;
+    font-size: 1.1rem;
+  }
+  .result-content {
+    background: #fff8ff;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    color: #333;
+    border: 1px solid #f3e0ea;
+    font-family: 'Courier New', monospace;
+  }
+  .copy-btn {
+    background: var(--rose-light);
+    color: var(--rose-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 9px 22px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    transition: all .18s;
+  }
+  .copy-btn:hover { background: var(--rose); color: #fff; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 28px 16px;
+    color: #bbb;
+    font-size: 0.82rem;
+  }
+  .heart { color: var(--rose); }
+
+  /* ── RESPONSIVO ── */
+  @media (max-width: 480px) {
+    .voice-row { flex-direction: column; }
+    .payment-grid { grid-template-columns: 1fr 1fr; }
+    .styles-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="petals" id="petals"></div>
+  <div style="position:relative;z-index:1">
+    <div class="badge">🌸 Semana do Dia das Mães 🌸</div>
+    <h1>Crie sua <em>Música Personalizada</em><br>em poucos minutos</h1>
+    <p>Uma lembrança única que emociona e encanta para sempre ✨</p>
+    <div class="price-tag">Por menos de <span>R$ 5,00</span> 🎵</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ASSUNTO -->
+  <div class="section">
+    <h2>🎵 Sobre o que será a música?</h2>
+    <div class="tags" id="assuntos">
+      <span class="tag" data-val="Dia das Mães">🌸 Dia das Mães</span>
+      <span class="tag" data-val="Dia dos Namorados">💑 Namorados</span>
+      <span class="tag" data-val="Esposa">💍 Esposa</span>
+      <span class="tag" data-val="Chá de Revelação">🎀 Chá de Revelação</span>
+      <span class="tag" data-val="Homenagem">🏆 Homenagem</span>
+      <span class="tag" data-val="Paródia">😂 Paródia</span>
+      <span class="tag" data-val="Time de Futebol">⚽ Time de Futebol</span>
+      <span class="tag" data-val="Comércio / Empresa">🏪 Comércio / Empresa</span>
+      <span class="tag" data-val="Aniversário">🎂 Aniversário</span>
+      <span class="tag" data-val="Casamento">💒 Casamento</span>
+      <span class="tag" data-val="Formatura">🎓 Formatura</span>
+      <span class="tag" data-val="Religioso / Gospel">🙏 Gospel</span>
+      <span class="tag" data-val="Bebê / Recém-nascido">👶 Bebê</span>
+      <span class="tag" data-val="Páscoa">🐣 Páscoa</span>
+      <span class="tag" data-val="Natal">🎄 Natal</span>
+      <span class="tag" data-val="Outro assunto">✏️ Outro assunto</span>
+    </div>
+  </div>
+
+  <!-- ESTILO MUSICAL -->
+  <div class="section">
+    <h2>🎸 Estilo Musical</h2>
+    <div class="styles-grid" id="estilos">
+      <div class="style-card" data-val="Sertanejo"><div class="style-icon">🤠</div>Sertanejo</div>
+      <div class="style-card" data-val="Pop"><div class="style-icon">🎤</div>Pop</div>
+      <div class="style-card" data-val="Pagode"><div class="style-icon">🥁</div>Pagode</div>
+      <div class="style-card" data-val="Funk"><div class="style-icon">🔊</div>Funk</div>
+      <div class="style-card" data-val="Forró"><div class="style-icon">🪗</div>Forró</div>
+      <div class="style-card" data-val="Axé"><div class="style-icon">🎺</div>Axé</div>
+      <div class="style-card" data-val="Gospel"><div class="style-icon">🙏</div>Gospel</div>
+      <div class="style-card" data-val="MPB"><div class="style-icon">🎶</div>MPB</div>
+      <div class="style-card" data-val="Rock"><div class="style-icon">🎸</div>Rock</div>
+      <div class="style-card" data-val="Infantil"><div class="style-icon">🧸</div>Infantil</div>
+      <div class="style-card" data-val="Romântico"><div class="style-icon">💕</div>Romântico</div>
+      <div class="style-card" data-val="Piseiro"><div class="style-icon">🎵</div>Piseiro</div>
+    </div>
+  </div>
+
+  <!-- VOZ -->
+  <div class="section">
+    <h2>🎙️ Voz</h2>
+    <div class="voice-row" id="vozes">
+      <div class="voice-btn" data-val="Masculina"><span class="v-icon">👨</span>Masculina</div>
+      <div class="voice-btn" data-val="Feminina"><span class="v-icon">👩</span>Feminina</div>
+    </div>
+  </div>
+
+  <!-- EXEMPLOS -->
+  <div class="section">
+    <h2>🎧 Ouça alguns exemplos</h2>
+    <div class="examples" id="exemplos-lista">
+      <div class="example-item">
+        <a href="#" class="play-btn" title="Ouvir exemplo">▶</a>
+        <div class="ex-info">
+          <div class="ex-title">Exemplo 1 — Adicione aqui</div>
+          <div class="ex-desc">Sertanejo · Homenagem para mãe</div>
+        </div>
+        <a href="#" class="ex-link">Ouvir →</a>
+      </div>
+      <div class="example-item">
+        <a href="#" class="play-btn" title="Ouvir exemplo">▶</a>
+        <div class="ex-info">
+          <div class="ex-title">Exemplo 2 — Adicione aqui</div>
+          <div class="ex-desc">Pagode · Dia dos Namorados</div>
+        </div>
+        <a href="#" class="ex-link">Ouvir →</a>
+      </div>
+    </div>
+
+    <button class="add-example-btn" onclick="toggleAddForm()">+ Adicionar link de exemplo</button>
+    <div class="add-form" id="add-form">
+      <input type="url" id="ex-url" placeholder="Link do exemplo (YouTube, Google Drive, etc)">
+      <input type="text" id="ex-titulo" placeholder="Título (ex: Sertanejo — Dia das Mães)">
+      <input type="text" id="ex-descricao" placeholder="Descrição curta (ex: Voz feminina · Emocionante)">
+      <button class="save-ex-btn" onclick="salvarExemplo()">✔ Salvar exemplo</button>
+    </div>
+  </div>
+
+  <!-- DADOS DO CLIENTE -->
+  <div class="section">
+    <h2>📝 Suas informações</h2>
+    <div class="form-group">
+      <label for="nome">Seu nome</label>
+      <input type="text" id="nome" placeholder="Como você quer ser chamado(a)?">
+    </div>
+    <div class="form-group">
+      <label for="whatsapp">WhatsApp para entrega</label>
+      <input type="tel" id="whatsapp" placeholder="(XX) 9XXXX-XXXX">
+    </div>
+    <div class="form-group">
+      <label for="detalhes">Detalhes para personalizar a música</label>
+      <textarea id="detalhes" placeholder="Conte um pouco mais: nome das pessoas, história, frases especiais, tom da música (alegre, emocionante, divertida)..."></textarea>
+    </div>
+  </div>
+
+  <!-- PAGAMENTO -->
+  <div class="section">
+    <h2>💳 Forma de pagamento</h2>
+    <div class="payment-grid" id="pagamentos">
+      <div class="pay-card" data-val="PIX">
+        <div class="pay-icon" style="color:#00b894">⚡</div>PIX
+      </div>
+      <div class="pay-card" data-val="Cartão de Crédito">
+        <div class="pay-icon" style="color:#1a73e8">💳</div>Cartão de Crédito
+      </div>
+      <div class="pay-card" data-val="Mercado Pago">
+        <div class="pay-icon" style="color:#009ee3">🔵</div>Mercado Pago
+      </div>
+      <div class="pay-card" data-val="Boleto / Dinheiro">
+        <div class="pay-icon" style="color:#4caf50">💵</div>Boleto / Dinheiro
+      </div>
+    </div>
+    <p class="secure-note">🔒 Pagamento 100% seguro · Entrega após confirmação do pagamento</p>
+  </div>
+
+  <!-- BOTÃO PRINCIPAL -->
+  <button class="btn-gerar" onclick="gerarResumo()">🎵 Gerar meu pedido agora</button>
+
+  <!-- RESULTADO -->
+  <div class="result-box" id="resultado">
+    <h3>📋 Resumo do Pedido — Copie e envie para produção</h3>
+    <div class="result-content" id="resultado-texto"></div>
+    <button class="copy-btn" id="copy-btn" onclick="copiarResumo()">📋 Copiar resumo</button>
+  </div>
+
+</div>
+
+<div class="footer">
+  Feito com <span class="heart">♥</span> para quem você ama · Músicas Personalizadas
+</div>
+
+<script>
+  // ── Pétalas animadas ──
+  (function() {
+    const container = document.getElementById('petals');
+    const flores = ['🌸','🌹','💐','🌷','🌺','🌼'];
+    for (let i = 0; i < 20; i++) {
+      const el = document.createElement('div');
+      el.className = 'petal';
+      el.style.left = (Math.random() * 100) + '%';
+      el.style.animationDuration = (3 + Math.random() * 5) + 's';
+      el.style.animationDelay = (Math.random() * 6) + 's';
+      el.style.fontSize = (13 + Math.random() * 14) + 'px';
+      el.textContent = flores[Math.floor(Math.random() * flores.length)];
+      container.appendChild(el);
+    }
+  })();
+
+  // ── Seleção única por grupo ──
+  function setupSingleSelect(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.querySelectorAll('[data-val]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        container.querySelectorAll('[data-val]').forEach(function(e) {
+          e.classList.remove('active');
+        });
+        el.classList.add('active');
+      });
+    });
+  }
+  setupSingleSelect('assuntos');
+  setupSingleSelect('estilos');
+  setupSingleSelect('vozes');
+  setupSingleSelect('pagamentos');
+
+  function getSelected(containerId) {
+    var el = document.querySelector('#' + containerId + ' .active');
+    return el ? el.dataset.val : 'Não selecionado';
+  }
+
+  // ── Adicionar exemplos ──
+  function toggleAddForm() {
+    var form = document.getElementById('add-form');
+    form.style.display = form.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function salvarExemplo() {
+    var url = document.getElementById('ex-url').value.trim();
+    var titulo = document.getElementById('ex-titulo').value.trim() || 'Novo Exemplo';
+    var desc = document.getElementById('ex-descricao').value.trim() || '';
+    if (!url) { alert('Informe o link do exemplo!'); return; }
+
+    var lista = document.getElementById('exemplos-lista');
+    var div = document.createElement('div');
+    div.className = 'example-item';
+    div.innerHTML =
+      '<a href="' + url + '" target="_blank" class="play-btn" title="Ouvir">▶</a>' +
+      '<div class="ex-info">' +
+        '<div class="ex-title">' + titulo + '</div>' +
+        '<div class="ex-desc">' + desc + '</div>' +
+      '</div>' +
+      '<a href="' + url + '" target="_blank" class="ex-link">Ouvir →</a>';
+    lista.appendChild(div);
+
+    document.getElementById('ex-url').value = '';
+    document.getElementById('ex-titulo').value = '';
+    document.getElementById('ex-descricao').value = '';
+    document.getElementById('add-form').style.display = 'none';
+  }
+
+  // ── Gerar resumo ──
+  function gerarResumo() {
+    var assunto   = getSelected('assuntos');
+    var estilo    = getSelected('estilos');
+    var voz       = getSelected('vozes');
+    var pagamento = getSelected('pagamentos');
+    var nome      = document.getElementById('nome').value.trim() || 'Não informado';
+    var whatsapp  = document.getElementById('whatsapp').value.trim() || 'Não informado';
+    var detalhes  = document.getElementById('detalhes').value.trim() || 'Nenhum detalhe informado';
+
+    var agora = new Date();
+    var data  = agora.toLocaleDateString('pt-BR') + ' às ' +
+                agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    var resumo =
+      '🎵 PEDIDO DE MÚSICA PERSONALIZADA\n' +
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+      '📅 Data: ' + data + '\n\n' +
+      '👤 Cliente: ' + nome + '\n' +
+      '📱 WhatsApp: ' + whatsapp + '\n\n' +
+      '🎯 Assunto: ' + assunto + '\n' +
+      '🎸 Estilo Musical: ' + estilo + '\n' +
+      '🎙️ Voz: ' + voz + '\n\n' +
+      '📝 Detalhes do cliente:\n' + detalhes + '\n\n' +
+      '💳 Pagamento: ' + pagamento + '\n' +
+      '💰 Valor: R$ 5,00\n\n' +
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+      '✅ STATUS: Aguardando confirmação de pagamento\n' +
+      '🎵 Entrega estimada: após confirmação do pagamento';
+
+    document.getElementById('resultado-texto').textContent = resumo;
+    var box = document.getElementById('resultado');
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Copiar resumo ──
+  function copiarResumo() {
+    var texto = document.getElementById('resultado-texto').textContent;
+    var btn = document.getElementById('copy-btn');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(function() {
+        btn.textContent = '✅ Copiado!';
+        setTimeout(function() { btn.textContent = '📋 Copiar resumo'; }, 2500);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = texto;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = '✅ Copiado!';
+      setTimeout(function() { btn.textContent = '📋 Copiar resumo'; }, 2500);
+    }
+  }
+</script>
+</body>
+</html>
