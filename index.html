@@ -154,6 +154,14 @@
   </div>
 </div>
 
+<!-- CONTADOR -->
+<div style="background:linear-gradient(90deg,#880e4f,#c2185b);padding:14px 20px;text-align:center">
+  <p style="color:#fff;font-size:0.95rem;font-family:'Nunito',sans-serif;margin:0">
+    🎶 <strong style="color:#ffe082;font-size:1.2rem" id="contador">197</strong>
+    <span style="opacity:0.9"> músicas criadas e entregues — e a sua pode ser a próxima! 🚀</span>
+  </p>
+</div>
+
 <div class="main">
 
   <div class="section">
@@ -235,7 +243,7 @@
       <div class="pix-chave-box">
         <div>
           <div class="pix-chave-label">Chave PIX (telefone)</div>
-          <div class="pix-chave-valor" id="chave-pix">14996074964</div>
+          <div class="pix-chave-valor" id="chave-pix">14982231818</div>
         </div>
         <button class="copy-pix-btn" onclick="copiarChavePix()">📋 Copiar chave</button>
       </div>
@@ -264,8 +272,20 @@
 </div>
 
 <script>
+  // Contador de músicas criadas
   (function() {
-    var container = document.getElementById('petals');
+    var BASE = 197;
+    var BASE_TIME = new Date('2026-05-09T00:00:00').getTime();
+    // incrementa ~3 por dia (1 a cada 8 horas)
+    var RATE_MS = 8 * 60 * 60 * 1000;
+    function atualizar() {
+      var agora = Date.now();
+      var incremento = Math.floor((agora - BASE_TIME) / RATE_MS);
+      document.getElementById('contador').textContent = (BASE + incremento).toLocaleString('pt-BR');
+    }
+    atualizar();
+    setInterval(atualizar, 60000);
+  })();
     var flores = ['🌸','🌹','💐','🌷','🌺','🌼'];
     for (var i = 0; i < 20; i++) {
       var el = document.createElement('div');
